@@ -23,6 +23,7 @@ module Bundler
       gem.mit
       ignore_messages
       init_gems_rb
+      install_caches_by_default
       major_deprecations
       no_install
       no_prune
