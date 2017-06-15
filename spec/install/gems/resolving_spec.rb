@@ -141,7 +141,7 @@ RSpec.describe "bundle install with install-time dependencies" do
 
           nice_error = strip_whitespace(<<-E).strip
             Fetching gem metadata from http://localgemserver.test/.
-            Fetching version metadata from http://localgemserver.test/
+            Fetching gem metadata from http://localgemserver.test/.
             Resolving dependencies...
             Bundler could not find compatible versions for gem "ruby\0":
               In Gemfile:
