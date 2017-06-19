@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 $:.unshift File.expand_path("..", __FILE__)
 $:.unshift File.expand_path("../../lib", __FILE__)
+$:.unshift File.expand_path("../../../delfos/lib", __FILE__)
 
 require "bundler/psyched_yaml"
 require "fileutils"
@@ -21,6 +22,9 @@ end
 if File.expand_path(__FILE__) =~ %r{([^\w/\.])}
   abort "The bundler specs cannot be run from a path that contains special characters (particularly #{$1.inspect})"
 end
+
+require "delfos"
+Delfos.setup! application_directories: %w(lib)
 
 require "bundler"
 
@@ -119,6 +123,7 @@ RSpec.configure do |config|
     system_gems []
     in_app_root
     @all_output = String.new
+    Delfos.flush!
   end
 
   config.after :each do |example|
