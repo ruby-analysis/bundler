@@ -1,0 +1,1326 @@
+
+Failures:
+
+  1) Bundler::Definition detects changes for a path gem with changes
+     Failure/Error: @actual = Bundler.read_file(actual)
+
+     NameError:
+       undefined method `matches?' for class `RSpec::Matchers::DSL::Matcher'
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Using foo 1.0 from source at `/Users/markburns/code/bundler/tmp/libs/foo`
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       # $? => 0
+
+       $ DEBUG='1'  /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --no-color
+       Running `bundle install --no-color` with bundler 1.15.1
+       Found changes from the lockfile, re-resolving dependencies because the gemspecs for path gems changed
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       0:  bundler (1.15.1) from /Users/markburns/code/bundler/lib/bundler/source
+       Fetching rack 1.0.0
+       Installing rack 1.0.0
+       Rack's post install message
+       0:  rack (1.0.0) from /Users/markburns/code/bundler/tmp/gems/system/specifications/rack-1.0.0.gemspec
+       Using foo 1.0 from source at `/Users/markburns/code/bundler/tmp/libs/foo`
+       0:  foo (1.0) from /Users/markburns/code/bundler/tmp/libs/foo/foo.gemspec
+       Bundle complete! 1 Gemfile dependency, 3 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       Post-install message from rack:
+       Rack's post install message
+       # $? => 0
+     # ./spec/support/matchers.rb:115:in `instance_method'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./lib/bundler.rb:395:in `read_file'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # ./spec/support/matchers.rb:27:in `matches?'
+     # ./spec/support/matchers.rb:219:in `lockfile_should_be'
+     # ./spec/bundler/definition_spec.rb:49:in `block (3 levels) in <top (required)>'
+
+  2) Bundler::Definition detects changes for a path gem with deps and no changes
+     Failure/Error: @actual = Bundler.read_file(actual)
+
+     NameError:
+       undefined method `matches?' for class `RSpec::Matchers::DSL::Matcher'
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Fetching rack 1.0.0
+       Installing rack 1.0.0
+       Using foo 1.0 from source at `/Users/markburns/code/bundler/tmp/libs/foo`
+       Bundle complete! 1 Gemfile dependency, 3 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       Post-install message from rack:
+       Rack's post install message
+       # $? => 0
+
+       $ DEBUG='1'  /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle check --no-color
+       Found no changes, using resolution from the lockfile
+       The Gemfile's dependencies are satisfied
+       # $? => 0
+     # ./spec/support/matchers.rb:115:in `instance_method'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./lib/bundler.rb:395:in `read_file'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # ./spec/support/matchers.rb:27:in `matches?'
+     # ./spec/support/matchers.rb:219:in `lockfile_should_be'
+     # ./spec/bundler/definition_spec.rb:86:in `block (3 levels) in <top (required)>'
+
+  3) Bundler::Definition detects changes for a rubygems gem
+     Failure/Error: @actual = Bundler.read_file(actual)
+
+     NameError:
+       undefined method `matches?' for class `RSpec::Matchers::DSL::Matcher'
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Fetching foo 1.0
+       Installing foo 1.0
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       # $? => 0
+
+       $ DEBUG='1'  /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle check --no-color
+       Found no changes, using resolution from the lockfile
+       The Gemfile's dependencies are satisfied
+       # $? => 0
+     # ./spec/support/matchers.rb:115:in `instance_method'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./lib/bundler.rb:395:in `read_file'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # ./spec/support/matchers.rb:27:in `matches?'
+     # ./spec/support/matchers.rb:219:in `lockfile_should_be'
+     # ./spec/bundler/definition_spec.rb:118:in `block (3 levels) in <top (required)>'
+
+  4) Bundler::Plugin::DSL source block registers a source type plugin only once for multiple declataions
+     Failure/Error: normalize_options(name, version, options)
+
+     NameError:
+       undefined method `gem' for class `Bundler::Plugin::DSL'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./spec/bundler/plugin/dsl_spec.rb:34:in `block (3 levels) in <top (required)>'
+
+  5) bundle check BUNDLED WITH is not present does not change the lock
+     Failure/Error: @actual = Bundler.read_file(actual)
+
+     NameError:
+       undefined method `matches?' for class `RSpec::Matchers::DSL::Matcher'
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Fetching rack 1.0.0
+       Installing rack 1.0.0
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       Post-install message from rack:
+       Rack's post install message
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle check --no-color
+       The Gemfile's dependencies are satisfied
+       # $? => 0
+     # ./spec/support/matchers.rb:115:in `instance_method'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./lib/bundler.rb:395:in `read_file'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # ./spec/support/matchers.rb:27:in `matches?'
+     # ./spec/support/matchers.rb:219:in `lockfile_should_be'
+     # ./spec/commands/check_spec.rb:325:in `block (4 levels) in <top (required)>'
+
+  6) bundle check BUNDLED WITH is newer does not change the lock but warns
+     Failure/Error: @actual = Bundler.read_file(actual)
+
+     NameError:
+       undefined method `matches?' for class `RSpec::Matchers::DSL::Matcher'
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Fetching rack 1.0.0
+       Installing rack 1.0.0
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       Post-install message from rack:
+       Rack's post install message
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle check --no-color
+       Warning: the running version of Bundler (1.15.1) is older than the version that created the lockfile (1.15.2). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.
+       The Gemfile's dependencies are satisfied
+       # $? => 0
+     # ./spec/support/matchers.rb:115:in `instance_method'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./lib/bundler.rb:395:in `read_file'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # ./spec/support/matchers.rb:27:in `matches?'
+     # ./spec/support/matchers.rb:219:in `lockfile_should_be'
+     # ./spec/commands/check_spec.rb:335:in `block (4 levels) in <top (required)>'
+
+  7) bundle check BUNDLED WITH is older does not change the lock
+     Failure/Error: @actual = Bundler.read_file(actual)
+
+     NameError:
+       undefined method `matches?' for class `RSpec::Matchers::DSL::Matcher'
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Fetching source index from file:/Users/markburns/code/bundler/tmp/gems/remote1/
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Fetching rack 1.0.0
+       Installing rack 1.0.0
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       Post-install message from rack:
+       Rack's post install message
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle check --no-color
+       The Gemfile's dependencies are satisfied
+       # $? => 0
+     # ./spec/support/matchers.rb:115:in `instance_method'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/eval_in_caller.rb:12:in `eval_in_caller'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:58:in `file'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:30:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location/container_method_factory.rb:16:in `create'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/code_location.rb:30:in `create_container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:30:in `container_method'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:24:in `call_site'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:46:in `relevant?'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace/call_handler.rb:15:in `perform'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:28:in `block in on_call'
+     # /Users/markburns/code/delfos/lib/delfos/method_trace.rb:55:in `block in setup_trace_point'
+     # ./lib/bundler.rb:395:in `read_file'
+     # ./spec/support/matchers.rb:115:in `block (2 levels) in <module:Matchers>'
+     # ./spec/support/matchers.rb:27:in `matches?'
+     # ./spec/support/matchers.rb:219:in `lockfile_should_be'
+     # ./spec/commands/check_spec.rb:343:in `block (4 levels) in <top (required)>'
+
+  8) bundle exec with help flags when e is used shows bundle-exec's man page when --help is between exec and the executable
+     Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+       expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+       Diff:
+       @@ -1,2 +1,12 @@
+       -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+       +Usage:
+       +  bundle exec [OPTIONS]
+       +
+       +Options:
+       +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+       +      [--no-color]                                             # Disable colorization in output
+       +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+       +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+       +
+       +Description:
+       +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+       Rack's post install message
+       Successfully installed rack-1.0.0
+       1 gem installed
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+       Rack's post install message
+       Successfully installed rack-0.9.1
+       1 gem installed
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Using rack 1.0.0
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle e --help cat
+       Usage:
+         bundle exec [OPTIONS]
+
+       Options:
+             [--keep-file-descriptors], [--no-keep-file-descriptors]
+             [--no-color]                                             # Disable colorization in output
+         -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+         -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+       Description:
+         Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+       # $? => 0
+     # ./spec/commands/exec_spec.rb:300:in `block (5 levels) in <top (required)>'
+
+  9) bundle exec with help flags when e is used shows bundle-exec's man page when --help is before exec
+     Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+       expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+       Diff:
+       @@ -1,2 +1,12 @@
+       -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+       +Usage:
+       +  bundle exec [OPTIONS]
+       +
+       +Options:
+       +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+       +      [--no-color]                                             # Disable colorization in output
+       +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+       +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+       +
+       +Description:
+       +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+       Commands:
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+       Rack's post install message
+       Successfully installed rack-1.0.0
+       1 gem installed
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+       Rack's post install message
+       Successfully installed rack-0.9.1
+       1 gem installed
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+       Resolving dependencies...
+       Using bundler 1.15.1
+       Using rack 1.0.0
+       Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+       Use `bundle info [gemname]` to see where a bundled gem is installed.
+       # $? => 0
+
+       $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle --help e --no-color
+       Usage:
+         bundle exec [OPTIONS]
+
+       Options:
+             [--keep-file-descriptors], [--no-keep-file-descriptors]
+             [--no-color]                                             # Disable colorization in output
+         -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+         -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+       Description:
+         Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+       # $? => 0
+     # ./spec/commands/exec_spec.rb:307:in `block (5 levels) in <top (required)>'
+
+  10) bundle exec with help flags when e is used shows bundle-exec's man page when -h is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle -h e --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:314:in `block (5 levels) in <top (required)>'
+
+  11) bundle exec with help flags when e is used shows bundle-exec's man page when --help is after exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle e --help
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:321:in `block (5 levels) in <top (required)>'
+
+  12) bundle exec with help flags when e is used shows bundle-exec's man page when -h is after exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle e -h
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:328:in `block (5 levels) in <top (required)>'
+
+  13) bundle exec with help flags when ex is used shows bundle-exec's man page when --help is between exec and the executable
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle ex --help cat
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:300:in `block (5 levels) in <top (required)>'
+
+  14) bundle exec with help flags when ex is used shows bundle-exec's man page when --help is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle --help ex --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:307:in `block (5 levels) in <top (required)>'
+
+  15) bundle exec with help flags when ex is used shows bundle-exec's man page when -h is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle -h ex --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:314:in `block (5 levels) in <top (required)>'
+
+  16) bundle exec with help flags when ex is used shows bundle-exec's man page when --help is after exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle ex --help
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:321:in `block (5 levels) in <top (required)>'
+
+  17) bundle exec with help flags when ex is used shows bundle-exec's man page when -h is after exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle ex -h
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:328:in `block (5 levels) in <top (required)>'
+
+  18) bundle exec with help flags when exe is used shows bundle-exec's man page when --help is between exec and the executable
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle exe --help cat
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:300:in `block (5 levels) in <top (required)>'
+
+  19) bundle exec with help flags when exe is used shows bundle-exec's man page when --help is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle --help exe --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:307:in `block (5 levels) in <top (required)>'
+
+  20) bundle exec with help flags when exe is used shows bundle-exec's man page when -h is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle -h exe --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:314:in `block (5 levels) in <top (required)>'
+
+  21) bundle exec with help flags when exe is used shows bundle-exec's man page when --help is after exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle exe --help
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:321:in `block (5 levels) in <top (required)>'
+
+  22) bundle exec with help flags when exe is used shows bundle-exec's man page when -h is after exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle exe -h
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:328:in `block (5 levels) in <top (required)>'
+
+  23) bundle exec with help flags when exec is used shows bundle-exec's man page when --help is between exec and the executable
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle exec --help cat
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:300:in `block (5 levels) in <top (required)>'
+
+  24) bundle exec with help flags when exec is used shows bundle-exec's man page when --help is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle --help exec --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:307:in `block (5 levels) in <top (required)>'
+
+  25) bundle exec with help flags when exec is used shows bundle-exec's man page when -h is before exec
+      Failure/Error: expect(out).to include(%(["#{root}/man/bundle-exec.1"]))
+
+        expected "Usage:\n  bundle exec [OPTIONS]\n\nOptions:\n      [--keep-file-descriptors], [--no-keep-file-descri...quire and call the bundled gems as if they were installed into the system wide RubyGems repository." to include "[\"/Users/markburns/code/bundler/man/bundle-exec.1\"]"
+        Diff:
+        @@ -1,2 +1,12 @@
+        -["/Users/markburns/code/bundler/man/bundle-exec.1"]
+        +Usage:
+        +  bundle exec [OPTIONS]
+        +
+        +Options:
+        +      [--keep-file-descriptors], [--no-keep-file-descriptors]
+        +      [--no-color]                                             # Disable colorization in output
+        +  -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+        +  -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+        +
+        +Description:
+        +  Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+
+
+        Commands:
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-1.0.0.gem'
+        Rack's post install message
+        Successfully installed rack-1.0.0
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -rubygems -S gem --backtrace install --no-rdoc --no-ri --ignore-dependencies '/Users/markburns/code/bundler/tmp/gems/remote1/gems/rack-0.9.1.gem'
+        Rack's post install message
+        Successfully installed rack-0.9.1
+        1 gem installed
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle install --retry 0 --no-color
+        Resolving dependencies...
+        Using bundler 1.15.1
+        Using rack 1.0.0
+        Bundle complete! 1 Gemfile dependency, 2 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        # $? => 0
+
+        $ /Users/markburns/.rbenv/versions/2.3.3/bin/ruby -I/Users/markburns/code/bundler/lib:/Users/markburns/code/bundler/spec -rsupport/hax -r/Users/markburns/code/bundler/spec/support/artifice/fail /Users/markburns/code/bundler/exe/bundle -h exec --no-color
+        Usage:
+          bundle exec [OPTIONS]
+
+        Options:
+              [--keep-file-descriptors], [--no-keep-file-descriptors]
+              [--no-color]                                             # Disable colorization in output
+          -r, [--retry=NUM]                                            # Specify the number of times you wish to attempt network commands
+          -V, [--verbose], [--no-verbose]                              # Enable verbose output mode
+
+        Description:
+          Exec runs a command, providing it access to the gems in the bundle. While using bundle exec you can require and call the bundled gems as if they were installed into the system wide RubyGems repository.
+        # $? => 0
+      # ./spec/commands/exec_spec.rb:314:in `block (5 levels) in <top (required)>'
+
+Finished in 9 minutes 26 seconds (files took 11.49 seconds to load)
+1017 examples, 25 failures
+
+Failed examples:
+
+rspec ./spec/bundler/definition_spec.rb:34 # Bundler::Definition detects changes for a path gem with changes
+rspec ./spec/bundler/definition_spec.rb:72 # Bundler::Definition detects changes for a path gem with deps and no changes
+rspec ./spec/bundler/definition_spec.rb:109 # Bundler::Definition detects changes for a rubygems gem
+rspec ./spec/bundler/plugin/dsl_spec.rb:31 # Bundler::Plugin::DSL source block registers a source type plugin only once for multiple declataions
+rspec ./spec/commands/check_spec.rb:322 # bundle check BUNDLED WITH is not present does not change the lock
+rspec ./spec/commands/check_spec.rb:330 # bundle check BUNDLED WITH is newer does not change the lock but warns
+rspec ./spec/commands/check_spec.rb:340 # bundle check BUNDLED WITH is older does not change the lock
+rspec './spec/commands/exec_spec.rb[1:20:1:6]' # bundle exec with help flags when e is used shows bundle-exec's man page when --help is between exec and the executable
+rspec './spec/commands/exec_spec.rb[1:20:1:7]' # bundle exec with help flags when e is used shows bundle-exec's man page when --help is before exec
+rspec './spec/commands/exec_spec.rb[1:20:1:8]' # bundle exec with help flags when e is used shows bundle-exec's man page when -h is before exec
+rspec './spec/commands/exec_spec.rb[1:20:1:9]' # bundle exec with help flags when e is used shows bundle-exec's man page when --help is after exec
+rspec './spec/commands/exec_spec.rb[1:20:1:10]' # bundle exec with help flags when e is used shows bundle-exec's man page when -h is after exec
+rspec './spec/commands/exec_spec.rb[1:20:2:6]' # bundle exec with help flags when ex is used shows bundle-exec's man page when --help is between exec and the executable
+rspec './spec/commands/exec_spec.rb[1:20:2:7]' # bundle exec with help flags when ex is used shows bundle-exec's man page when --help is before exec
+rspec './spec/commands/exec_spec.rb[1:20:2:8]' # bundle exec with help flags when ex is used shows bundle-exec's man page when -h is before exec
+rspec './spec/commands/exec_spec.rb[1:20:2:9]' # bundle exec with help flags when ex is used shows bundle-exec's man page when --help is after exec
+rspec './spec/commands/exec_spec.rb[1:20:2:10]' # bundle exec with help flags when ex is used shows bundle-exec's man page when -h is after exec
+rspec './spec/commands/exec_spec.rb[1:20:3:6]' # bundle exec with help flags when exe is used shows bundle-exec's man page when --help is between exec and the executable
+rspec './spec/commands/exec_spec.rb[1:20:3:7]' # bundle exec with help flags when exe is used shows bundle-exec's man page when --help is before exec
+rspec './spec/commands/exec_spec.rb[1:20:3:8]' # bundle exec with help flags when exe is used shows bundle-exec's man page when -h is before exec
+rspec './spec/commands/exec_spec.rb[1:20:3:9]' # bundle exec with help flags when exe is used shows bundle-exec's man page when --help is after exec
+rspec './spec/commands/exec_spec.rb[1:20:3:10]' # bundle exec with help flags when exe is used shows bundle-exec's man page when -h is after exec
+rspec './spec/commands/exec_spec.rb[1:20:4:6]' # bundle exec with help flags when exec is used shows bundle-exec's man page when --help is between exec and the executable
+rspec './spec/commands/exec_spec.rb[1:20:4:7]' # bundle exec with help flags when exec is used shows bundle-exec's man page when --help is before exec
+rspec './spec/commands/exec_spec.rb[1:20:4:8]' # bundle exec with help flags when exec is used shows bundle-exec's man page when -h is before exec
