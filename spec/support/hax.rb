@@ -50,3 +50,8 @@ class Object
     end
   end
 end
+
+if ENV["BUNDLER_SPEC_IGNORE_COMPATILITY_GUARD"]
+  $LOADED_FEATURES.unshift "bundler/compatibility_guard"
+  $LOADED_FEATURES.unshift "bundler/compatibility_guard.rb"
+end
