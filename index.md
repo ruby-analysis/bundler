@@ -357,14 +357,15 @@ MATCH (c1:Class)-[:OWNS]->(m1:Method)
   -[:CONTAINS]->(cs2:CallSite)-[:CALLS]->(m3:Method)
   <-[:OWNS]-(c1)
 
-RETURN *
+RETURN c1, m1, cs1, m2, cs2, m3
 LIMIT 1
 ```
 
+![Cylic dependency example](same-class-method-call.svg]
 We get results for method calls in the same class!
 That's not what we want.
 
-OK so let's ensure we are using different classes:
+OK so let's ensure 
 
 ```cypher
 MATCH (c1:Class)-[:OWNS]->(m1:Method)
@@ -372,9 +373,15 @@ MATCH (c1:Class)-[:OWNS]->(m1:Method)
   -[:CONTAINS]->(cs2:CallSite)-[:CALLS]->(m3:Method)
   <-[:OWNS]-(c2)
 
-RETURN *
+RETURN c1, c2, m1, cs1, m2, cs2, m3
 LIMIT 1
 ```
+
+
+![Cylic dependency example](cyclic-dependencies.svg]
+
+You can see an interacting version of these results [here](http://portal.graphgist.org/graph_gist_candidates/3d5e8fe6-3e86-46d7-91e1-cccd612d5137#)
+
 
 
 
