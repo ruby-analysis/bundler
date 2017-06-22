@@ -24,7 +24,7 @@ if File.expand_path(__FILE__) =~ %r{([^\w/\.])}
 end
 
 require "delfos"
-Delfos.setup! application_directories: %w(lib)
+Delfos.setup! application_directories: %w(lib), offline_query_saving: true
 
 require "bundler"
 
@@ -123,10 +123,13 @@ RSpec.configure do |config|
     system_gems []
     in_app_root
     @all_output = String.new
-    Delfos.flush!
   end
 
   config.after :each do |example|
+    if example.exception
+      Delfos.flush!
+    end
+
     @all_output.strip!
     if example.exception && !@all_output.empty?
       warn @all_output unless config.formatters.grep(RSpec::Core::Formatters::DocumentationFormatter).empty?
