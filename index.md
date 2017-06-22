@@ -361,7 +361,7 @@ RETURN c1, m1, cs1, m2, cs2, m3
 LIMIT 1
 ```
 
-![Cylic dependency example](same-class-method-call.svg]
+![Non cyclic dependency example](same-class-method-call.svg)
 We get results for method calls in the same class!
 That's not what we want.
 
@@ -378,7 +378,7 @@ LIMIT 1
 ```
 
 
-![Cylic dependency example](cyclic-dependencies.svg]
+![Cylic dependency example](cyclic-dependencies.svg)
 
 You can see an interacting version of these results [here](http://portal.graphgist.org/graph_gist_candidates/3d5e8fe6-3e86-46d7-91e1-cccd612d5137#)
 
