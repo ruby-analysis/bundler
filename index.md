@@ -5,7 +5,7 @@ So we want to analyse [bundler](http://bundler.io/) with
 
 Delfos allows us to record runtime type information and call sites and call
 stacks for later analysis in a [neo4j](https://neo4j.com/) graph database. You
-can also write [custom (non-neo4j) loggers](https://github.com/ruby-analysis/delfos).
+can also write [custom (non-neo4j) loggers](https://github.com/ruby-analysis/delfos-custom-call-site-logger-example)
 
 Ruby is great for its ease of development, but as an application grows, one's
 ability to understand a huge application starts to dwindle.
