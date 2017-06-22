@@ -114,7 +114,7 @@ For bundler this file was 57M
 The file contents are actually lines of `json`, one query per line.
 The bundler output looks like this:
 
-```
+```json
 {"step_number":1,"stack_uuid":"52083c51-375a-4f7c-a64a-349cb1fa82f5","call_site_file":"lib/bundler/errors.rb","call_site_line_number":19,"container_method_klass_name":"Bundler::GemfileError","container_method_type":"ClassMethod","container_method_name":"(main)","container_method_file":null,"container_method_line_number":-1,"called_method_klass_name":"Bundler::GemfileError","called_method_type":"ClassMethod","called_method_name":"status_code","called_method_file":"lib/bundler/errors.rb","called_method_line_number":4}
 {"step_number":2,"stack_uuid":"52083c51-375a-4f7c-a64a-349cb1fa82f5","call_site_file":"lib/bundler/errors.rb","call_site_line_number":6,"container_method_klass_name":"Bundler::GemfileError","container_method_type":"ClassMethod","container_method_name":"status_code","container_method_file":"lib/bundler/errors.rb","container_method_line_number":4,"called_method_klass_name":"Bundler::BundlerError","called_method_type":"ClassMethod","called_method_name":"all_errors","called_method_file":"lib/bundler/errors.rb","called_method_line_number":14}
 {"step_number":3,"stack_uuid":"52083c51-375a-4f7c-a64a-349cb1fa82f5","call_site_file":"lib/bundler/errors.rb","call_site_line_number":11,"container_method_klass_name":"Bundler::GemfileError","container_method_type":"ClassMethod","container_method_name":"status_code","container_method_file":"lib/bundler/errors.rb","container_method_line_number":4,"called_method_klass_name":"Bundler::BundlerError","called_method_type":"ClassMethod","called_method_name":"all_errors","called_method_file":"lib/bundler/errors.rb","called_method_line_number":14}
@@ -149,6 +149,8 @@ Here's what the first query would look like:
 It's maybe a bit overwhelming, if you've not looked at neo4j before so
 let's hide the attributes and variable names.
 
+Neo4j cypher syntax is basically `(node) -[:relationship]-> (another_node)`
+
 ```cypher
 (CallStack) -[:STEP]-> (CallSite)
 
@@ -172,24 +174,27 @@ We can reorder this query like this:
 
 So trying to read this out we have:
 
-```
+`(CallStack) -[:STEP]-> (CallSite)`
+
 A `CallStack` has a `STEP` to a `CallSite`.
-```
 
 This represents our ordinary chain of execution.
 
-Reading backwards now, we have
+Reading backwards now, we have:
 
-```
+`(Class) -[:OWNS]-> (Method) -[:CONTAINS]-> (CallSite)`
+
 A `Class` which `OWNS` a `Method` which `CONTAINS` the `CallSite`
-```
 
-Then we have
+Then we have:
 
-```
+`(Class) -[:OWNS]-> (Method)`
+
 Another `Class` which `OWNS` another `Method`.
+
+`(Method) <-[:CALLS]- (CallSite)`
+
 The `CallSite` `CALLS` this `Method`.
-```
 
 In summary we have three things which represent code we care about:
 - A container `Method` in a file with a line number which belongs to a `Class`
@@ -200,6 +205,8 @@ We also have some temporal information recorded which is the sequence
 of `CallSite`s that are linked together in numbered `STEP`s from a `CallStack` node.
 
 # Let's import!
+
+OK so now we know a bit about the data we'll be importing, let's get started.
 
 Delfos comes with an executable for turning these persisted parameters into their
 corresponding neo4j queries and importing them.
@@ -326,10 +333,15 @@ So back to our original list of things to look for:
 - Code that is colocated, but completely unrelated. I.e. should be in a different module/directory.
 
 
-First one. Cyclic dependencies. 
-So we want a `Class` that `OWNS` a `Method` that `CONTAINS` a `CallSite` that 
-`Calls` another `Method` that contains another `CallSite` that calls a `Method` that the original 
-`Class` `OWNS`.
+# 1. Cyclic dependencies
+
+First one. Cyclic dependencies.
+
+So we want a
+`Class` that `OWNS` a `Method`
+that `CONTAINS` a `CallSite` that `Calls` another `Method`
+that contains another `CallSite` that calls a `Method` that the original
+`Class` `OWNS`. Phew!
 
 It's a bit awkward phrasing like that, but I find it helps me build queries.
 
@@ -341,11 +353,28 @@ Here's the query
 
 ```cypher
 MATCH (c1:Class)-[:OWNS]->(m1:Method)
--[:CONTAINS]->(cs1:CallSite)-[:CALLS]->(m2:Method)
--[:CONTAINS]->(cs2:CallSite)-[:CALLS]->(m3:Method)
-<-[:OWNS]-(c1)
+  -[:CONTAINS]->(cs1:CallSite)-[:CALLS]->(m2:Method)
+  -[:CONTAINS]->(cs2:CallSite)-[:CALLS]->(m3:Method)
+  <-[:OWNS]-(c1)
 
-RETURN c1, m1, cs1, m2, cs2, m3
+RETURN *
+LIMIT 1
 ```
+
+We get results for method calls in the same class!
+That's not what we want.
+
+OK so let's ensure we are using different classes:
+
+```cypher
+MATCH (c1:Class)-[:OWNS]->(m1:Method)
+  -[:CONTAINS]->(cs1:CallSite)-[:CALLS]->(m2:Method)
+  -[:CONTAINS]->(cs2:CallSite)-[:CALLS]->(m3:Method)
+  <-[:OWNS]-(c2)
+
+RETURN *
+LIMIT 1
+```
+
 
 
