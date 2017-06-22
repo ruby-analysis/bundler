@@ -1,6 +1,5 @@
 # Bundler analysis with Delfos
 
-
 So we want to analyse [bundler](http://bundler.io/) with
 [Delfos](https://github.com/ruby-analysis/delfos).
 
@@ -8,18 +7,18 @@ Delfos allows us to record runtime type information and call sites and call
 stacks for later analysis in a [neo4j](https://neo4j.com/) graph database. You
 can also write [custom (non-neo4j) loggers](https://github.com/ruby-analysis/delfos).
 
-Ruby is great for its ease of development, but as an application grows, the
-ability to understand a really huge application starts to dwindle.
+Ruby is great for its ease of development, but as an application grows, one's
+ability to understand a huge application starts to dwindle.
 
 - You don't have static analysis tools that enable easy refactoring.
-- Most applications don't really break apart code into separate packages.
+- Most applications don't break apart code into separate packages.
 - As the project grows each directory grows with the complexity of the project and number of features.
 
 You may have seen a Rails app with hundreds of models and controllers, and a
 folder for every other design pattern under the sun.
 
 With tests, we can tend to refactor with a degree of confidence, but often it
-can be difficult to truly know
+can be difficult to know
 - what code is still used
 - by who
 - for what purpose
@@ -30,9 +29,10 @@ With Delfos we can start to answer these questions on large ruby projects.
 Well it would be nice to use open source software to improve the open source software we use everyday.
 What are some of the things we may hope to find.
 
+
+
 ## What do we hope to gain?
-By having runtime information and call stacks, we can find out more about our code than we
-typically can with other static analysis tools.
+By having runtime information and call stacks, we can find out more about our code than with static analysis tools.
 
 Code issues highlighted by knowing types at runtime:
 
@@ -40,18 +40,18 @@ Code issues highlighted by knowing types at runtime:
   - in single execution chains
   - at all between two classes (even within separate execution chains/contexts)
   - between different classes in two modules
-- Code in one module and directory heavily coupled to another far away module and directory
-- Heavily coupled classes that are candidates for unifying:
+- Code in one module and directory coupled to another far away module and directory
+- Coupled classes that are candidates for unifying:
   - completely
   - certain methods into one object, and others into another object
 - A class/classes that stand(s) out as belonging in another module
 - Feature envy
-  - multiple calls to the same object within the same method
-  - multiple calls to the same object within the same execution chain (but different methods)
-- Code that is colocated, but completely unrelated. I.e. should be in a different module/directory.
-
+  -  calls to the same object within the same method
+  -  calls to the same object within the same execution chain (but different methods)
+- Colocated but unrelated code. I.e. should be in a different module/directory.
 
 ## Let's get started
+
 
 OK so we want to run the analysis on bundler.
 We fork the bundler repo to [https://github.com/ruby-analysis/delfos)(https://github.com/ruby-analysis/delfos).
@@ -62,11 +62,9 @@ Bundler is a bit of a complex example to begin with, as for the sanity
 of the bundler developers, they decided not to use bundler itself to manage
 its own dependencies.
 
-In your application or gem (unless it's a competing package manager) you won't
-need to deal with this complexity and should be able to just add `gem 'delfos'`
-to your Gemfile.
+Unless your code is a bundler competitor you won't need this complexity. You can add `gem 'delfos'` to your Gemfile.
 
-We're currently using delfos locally gem so the path is relative.
+We're currently using delfos locally so the path is relative.
 
 ```ruby
 $:.unshift File.expand_path("../../../delfos/lib", __FILE__)
@@ -79,17 +77,16 @@ Normal `Delfos` setup:
 Delfos.setup! application_directories: "lib", offline_query_saving: true
 ```
 
-Note the `offline_query_saving` parameter. This means that during execution of the
-bundler test suite, we just persist the raw query parameters to disk instead of
-trying to write every query 'live' to neo4j.
+Note the `offline_query_saving` parameter. This means during execution, we persist the raw query parameters to disk. That is, instead of trying to write every query 'live' to neo4j.
 
-The default behaviour is 'live' and you can probably get away with this for small test suites and
-for ordinary usage clicking around an app in development mode.
+The default behaviour is 'live' and you can get away with this for small test suites. Or for ordinary usage clicking around an app in development mode.
 
 
 # Recording the data
 
-Now we run the tests for bundler it is slightly unusual:
+Now we run the tests for bundler. It has its own command for installing dependencies:
+
+
 
 ```
 bundler rake spec:deps
@@ -146,8 +143,7 @@ Here's what the first query would look like:
 (call_site)-[:CALLS]->(called_method)
 ```
 
-It's maybe a bit overwhelming, if you've not looked at neo4j before so
-let's hide the attributes and variable names.
+It's maybe a bit overwhelming, if you've not looked at neo4j before so let's hide the attributes and variable names.
 
 Neo4j cypher syntax is basically `(node) -[:relationship]-> (another_node)`
 
@@ -545,7 +541,7 @@ Delfos::Neo4j.execute_sync(<<-QUERY)
   LIMIT 1
 QUERY
 
-=> [[{"name"=>"Bundler::Source::Git"}, {"file"=>"lib/bundler/source/git.rb", "name"=>"load_spec_files", "line_number"=>200, "type"=>"InstanceMethod"}, 
+=> [[{"name"=>"Bundler::Source::Git"}, {"file"=>"lib/bundler/source/git.rb", "name"=>"load_spec_files", "line_number"=>200, "type"=>"InstanceMethod"},
 {"name"=>"Bundler::StubSpecification"}, {"file"=>"lib/bundler/stub_specification.rb", "name"=>"source=", "line_number"=>18, "type"=>"InstanceMethod"}]]
 ```
 
