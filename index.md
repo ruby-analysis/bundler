@@ -397,6 +397,214 @@ OK so now we're getting somewhere
 
 You can see an interacting version of these results [here](http://portal.graphgist.org/graph_gist_candidates/3d5e8fe6-3e86-46d7-91e1-cccd612d5137#)
 
+Great!
 
+What does the source code look like?
+Well let's include the `CallStack` nodes. So we can see the relevant chains of execution
+
+
+```
+MATCH (c1:Class)-[o:OWNS]->(m1:Method)
+  -[con1:CONTAINS]->(cs1:CallSite)-[call1:CALLS]->(m2:Method)
+  -[con2:CONTAINS]->(cs2:CallSite)-[call2:CALLS]->(m3:Method)
+  <-[o2:OWNS]-(c1),
+(c2:Class)-[o3:OWNS]->(m2),
+
+(callstack:CallStack)-[:STEP]->(cs1),
+(callstack:CallStack)-[:STEP]->(cs2)
+
+WHERE c2.name <> c1.name
+  AND c1.name <> "Bundler::BundlerError"
+  AND c2.name <> "Bundler::BundlerError"
+  AND c1.name <> "Bundler"
+  AND c2.name <> "Bundler"
+
+RETURN *
+LIMIT 1
+```
+
+
+![Cylic dependency with call stack](cyclic-dependencies-with-call-stack.svg)
+
+OK If we look at the step numbers we have step 533 and 534.
+Woah! Way down the rabbit hole.
+
+![Rabbit hole](The-rabbit-hole-natasha-bishop.jpg)
+
+That means this is step 533 in just the application code (excluding libraries).
+Imagine trying to debug your way into that.
+
+OK so now we have the execution chains and the files and line numbers we can go and look at what's happening in the source code.
+
+
+Within the Delfos repo:
+
+```
+NEO4J_PORT=8001 bin/console
+```
+
+```ruby
+require "delfos/neo4j"
+
+Delfos::Neo4j.execute_sync(<<-QUERY)
+  MATCH (c1:Class)-[o:OWNS]->(m1:Method)
+    -[con1:CONTAINS]->(cs1:CallSite)-[call1:CALLS]->(m2:Method)
+    -[con2:CONTAINS]->(cs2:CallSite)-[call2:CALLS]->(m3:Method)
+    <-[o2:OWNS]-(c1),
+  (c2:Class)-[o3:OWNS]->(m2),
+
+  (callstack:CallStack)-[:STEP]->(cs1),
+  (callstack:CallStack)-[:STEP]->(cs2)
+
+  WHERE c2.name <> c1.name
+    AND c1.name <> "Bundler::BundlerError"
+    AND c2.name <> "Bundler::BundlerError"
+    AND c1.name <> "Bundler"
+    AND c2.name <> "Bundler"
+
+  RETURN *
+  LIMIT 1
+QUERY
+
+=> [[{"name"=>"Bundler::Source::Git"}, {"name"=>"Bundler::StubSpecification"}, {}, {}, {"uuid"=>"c1b21cb9-e558-49f4-8f4c-4a7281c840bf"}, {}, {}, {"file"=>"lib/bundler/source/path.rb", "line_number"=>166}, {"file"=>"lib/bundler/stub_specification.rb", "line_number"=>23}, {"file"=>"lib/bundler/source/git.rb", "name"=>"load_spec_files", "line_number"=>200, "type"=>"InstanceMethod"}, {"file"=>"lib/bundler/stub_specification.rb", "name"=>"source=", "line_number"=>18, "type"=>"InstanceMethod"}, {"file"=>"lib/bundler/source/git.rb", "name"=>"extension_dir_name", "line_number"=>106, "type"=>"InstanceMethod"}, {}, {}, {}]]
+```
+
+OK so `RETURN *` might be a bit hard to parse.
+
+Howabout:
+
+```ruby
+require "delfos/neo4j"
+
+Delfos::Neo4j.execute_sync(<<-QUERY)
+  MATCH (c1:Class)-[o:OWNS]->(m1:Method)
+    -[con1:CONTAINS]->(cs1:CallSite)-[call1:CALLS]->(m2:Method)
+    -[con2:CONTAINS]->(cs2:CallSite)-[call2:CALLS]->(m3:Method)
+    <-[o2:OWNS]-(c1),
+  (c2:Class)-[o3:OWNS]->(m2),
+
+  (callstack:CallStack)-[:STEP]->(cs1),
+  (callstack:CallStack)-[:STEP]->(cs2)
+
+  WHERE c2.name <> c1.name
+    AND c1.name <> "Bundler::BundlerError"
+    AND c2.name <> "Bundler::BundlerError"
+    AND c1.name <> "Bundler"
+    AND c2.name <> "Bundler"
+
+  RETURN cs1, cs2
+  LIMIT 1
+QUERY
+
+=> [[{"file"=>"lib/bundler/source/path.rb", "line_number"=>166}, {"file"=>"lib/bundler/stub_specification.rb", "line_number"=>23}]]
+```
+
+Alright that's easier. Let's have a look at the source around line 166
+
+
+```ruby
+puts File.readlines("../bundler/lib/bundler/source/path.rb")[160..170].map.with_index{|l, i| "#{160+i+1}: #{l}" }
+161:
+162:         if File.directory?(expanded_path)
+163:           # We sort depth-first since `<<` will override the earlier-found specs
+164:           Dir["#{expanded_path}/#{@glob}"].sort_by {|p| -p.split(File::SEPARATOR).size }.each do |file|
+165:             next unless spec = load_gemspec(file)
+166:             spec.source = self
+167:
+168:             # Validation causes extension_dir to be calculated, which depends
+169:             # on #source, so we validate here instead of load_gemspec
+170:             validate_spec(spec)
+171:             index << spec
+```
+
+OK, so we're setting `spec.source` to be self. Which might explain the circular dependency.
+
+Just looking at 5 lines either side isn't great though. Can we see the whole method?
+
+
+```ruby
+require "delfos/neo4j"
+
+Delfos::Neo4j.execute_sync(<<-QUERY)
+  MATCH (c1:Class)-[o:OWNS]->(m1:Method)
+    -[con1:CONTAINS]->(cs1:CallSite)-[call1:CALLS]->(m2:Method)
+    -[con2:CONTAINS]->(cs2:CallSite)-[call2:CALLS]->(m3:Method)
+    <-[o2:OWNS]-(c1),
+  (c2:Class)-[o3:OWNS]->(m2),
+
+  (callstack:CallStack)-[:STEP]->(cs1),
+  (callstack:CallStack)-[:STEP]->(cs2)
+
+  WHERE c2.name <> c1.name
+    AND c1.name <> "Bundler::BundlerError"
+    AND c2.name <> "Bundler::BundlerError"
+    AND c1.name <> "Bundler"
+    AND c2.name <> "Bundler"
+
+  RETURN c1, m1, c2, m2
+  LIMIT 1
+QUERY
+
+=> [[{"name"=>"Bundler::Source::Git"}, {"file"=>"lib/bundler/source/git.rb", "name"=>"load_spec_files", "line_number"=>200, "type"=>"InstanceMethod"}, 
+{"name"=>"Bundler::StubSpecification"}, {"file"=>"lib/bundler/stub_specification.rb", "name"=>"source=", "line_number"=>18, "type"=>"InstanceMethod"}]]
+```
+
+
+OK So `Bundler::Source::Git#load_spec_files` calls `Bundler::StubSpecification#source=`
+
+how about pry?
+
+
+```ruby
+require "pry"
+binding.pry
+[2] pry(main)> show-source Bundler::Source::Git#load_spec_files
+
+From: /Users/markburns/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bundler-1.15.1/lib/bundler/source/git.rb @ line 200:
+Owner: Bundler::Source::Git
+Visibility: public
+Number of lines: 6
+
+def load_spec_files
+  super
+rescue PathError => e
+  Bundler.ui.trace e
+  raise GitError, "#{self} is not yet checked out. Run `bundle install` first."
+end
+
+[3] pry(main)> show-source Bundler::StubSpecification#source=
+
+From: /Users/markburns/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bundler-1.15.1/lib/bundler/stub_specification.rb @ line 18:
+Owner: Bundler::StubSpecification
+Visibility: public
+Number of lines: 8
+
+def source=(source)
+  super
+  # Stub has no concept of source, which means that extension_dir may be wrong
+  # This is the case for git-based gems. So, instead manually assign the extension dir
+  return unless source.respond_to?(:extension_dir_name)
+  path = File.join(stub.extensions_dir, source.extension_dir_name)
+  stub.extension_dir = File.expand_path(path)
+end
+```
+
+OK nice. So now wouldn't it be great to be able to step through any CallStack in the graph?
+
+How many do we have?
+
+```cypher
+MATCH (c1:CallStack)
+RETURN count(c1)
+```
+
+```
+count(c1)
+13782
+```
+
+Over 13,000 `CallStack`s to look at.
+
+OK now my next project is to write a CallStack browser....
 
 
