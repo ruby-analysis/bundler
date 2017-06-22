@@ -395,7 +395,7 @@ LIMIT 1
 
 OK so now we're getting somewhere
 
-You can see an interacting version of these results [here](http://portal.graphgist.org/graph_gist_candidates/3d5e8fe6-3e86-46d7-91e1-cccd612d5137#)
+You can see an interactive version of these results [here](http://portal.graphgist.org/graph_gist_candidates/3d5e8fe6-3e86-46d7-91e1-cccd612d5137#)
 
 Great!
 
