@@ -362,23 +362,38 @@ LIMIT 1
 ```
 
 ![Non cyclic dependency example](same-class-method-call.svg)
+
 We get results for method calls in the same class!
 That's not what we want.
 
-OK so let's ensure 
+OK so let's ensure we get a call to one class, then back to the original class.
+We do this by asserting the names of `c1` and `c2` are not equal with
+`WHERE c2.name <> c1.name`.
+
+The first few queries returned less interesting results where the code
+was error handling code, so I've also excluded those.
 
 ```cypher
-MATCH (c1:Class)-[:OWNS]->(m1:Method)
-  -[:CONTAINS]->(cs1:CallSite)-[:CALLS]->(m2:Method)
-  -[:CONTAINS]->(cs2:CallSite)-[:CALLS]->(m3:Method)
-  <-[:OWNS]-(c2)
+MATCH (c1:Class)-[o:OWNS]->(m1:Method)
+  -[con1:CONTAINS]->(cs1:CallSite)-[call1:CALLS]->(m2:Method)
+  -[con2:CONTAINS]->(cs2:CallSite)-[call2:CALLS]->(m3:Method)
+  <-[o2:OWNS]-(c1),
+(c2:Class)-[o3:OWNS]->(m2)
 
-RETURN c1, c2, m1, cs1, m2, cs2, m3
+WHERE c2.name <> c1.name
+  AND c1.name <> "Bundler::BundlerError"
+  AND c2.name <> "Bundler::BundlerError"
+  AND c1.name <> "Bundler"
+  AND c2.name <> "Bundler"
+
+RETURN *
 LIMIT 1
 ```
 
 
 ![Cylic dependency example](cyclic-dependencies.svg)
+
+OK so now we're getting somewhere
 
 You can see an interacting version of these results [here](http://portal.graphgist.org/graph_gist_candidates/3d5e8fe6-3e86-46d7-91e1-cccd612d5137#)
 
