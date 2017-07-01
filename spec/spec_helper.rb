@@ -3,6 +3,8 @@ $:.unshift File.expand_path("..", __FILE__)
 $:.unshift File.expand_path("../../lib", __FILE__)
 $:.unshift File.expand_path("../../../delfos/lib", __FILE__)
 
+require "binding_of_caller"
+
 require "bundler/psyched_yaml"
 require "fileutils"
 require "uri"
@@ -23,8 +25,7 @@ if File.expand_path(__FILE__) =~ %r{([^\w/\.])}
   abort "The bundler specs cannot be run from a path that contains special characters (particularly #{$1.inspect})"
 end
 
-require "delfos"
-Delfos.setup! application_directories: %w(lib), offline_query_saving: true
+
 
 require "bundler"
 
@@ -126,12 +127,11 @@ RSpec.configure do |config|
   end
 
   config.after :each do |example|
-    if example.exception
-      Delfos.flush!
-    end
+    Delfos.reset!
 
-    @all_output.strip!
-    if example.exception && !@all_output.empty?
+    @all_output&.strip!
+
+    if example.exception && !@all_output&.empty?
       warn @all_output unless config.formatters.grep(RSpec::Core::Formatters::DocumentationFormatter).empty?
       message = example.exception.message + "\n\nCommands:\n#{@all_output}"
       (class << example.exception; self; end).send(:define_method, :message) do
@@ -143,3 +143,88 @@ RSpec.configure do |config|
     ENV.replace(original_env)
   end
 end
+
+require "delfos"
+require "fileutils"
+
+FileUtils.mkdir_p "tmp-delfos"
+
+class DelfosLogger
+  def initialize
+
+    # iniitialize log files
+    %w(error fatal info debug).each do |type|
+      FileUtils.touch "./tmp-delfos/#{type}.log"
+      log_files[type]
+    end
+  end
+
+  def error(msg=nil, &block)
+    if block_given?
+      log((block.call), "error", STDOUT)
+    else
+      log(msg, "error", STDOUT)
+    end
+  end
+
+  def info(msg=nil)
+    #log(msg, "info")
+  end
+
+  def debug(msg=nil)
+    #log(msg, "debug")
+  end
+
+  def fatal(msg=nil, &block)
+    if block_given?
+      log((block.call), "fatal", STDOUT)
+    else
+      log(msg, "fatal", STDOUT)
+    end
+  end
+
+  def flush
+    log_files.values.each(&:flush)
+  end
+
+  def close
+    flush
+    log_files.values.each(&:close)
+  end
+
+  private
+
+  def log(msg, *types)
+    types.each do |type|
+      if type==STDOUT
+        STDOUT.puts(msg)
+      else
+        log_file(type).puts msg
+      end
+    end
+  end
+
+  def log_file(type)
+    log_files[type] ||= File.open("./tmp-delfos/#{type}.log", "a")
+  end
+
+  def log_files
+    @log_files ||= {}
+  end
+
+  def write_to_both(msg, type)
+    write_to_one(msg, type)
+
+    STDOUT.puts msg
+  end
+end
+
+
+Delfos.configure do |c|
+  c.include= "lib"
+  c.logger = DelfosLogger.new
+  c.offline_query_saving = true
+  c.offline_query_filename = "tmp-delfos/query_parameters-2.json"
+end
+
+Delfos.start!

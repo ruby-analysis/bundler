@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = ">= 1.8.7"
   s.required_rubygems_version = ">= 1.3.6"
 
+  s.add_development_dependency "binding_of_caller", "~> 0.7.2"
   s.add_development_dependency "automatiek", "~> 0.1.0"
   s.add_development_dependency "mustache",   "0.99.6"
   s.add_development_dependency "rake",       "~> 10.0"
